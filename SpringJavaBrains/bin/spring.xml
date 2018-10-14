@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd" >
+<!-- Triangle : Setter & Cons innjection-->
+
+<bean id="triangle" class="com.spring.Triangle">
+
+<!-- <property name="height" value="10"></property>
+	<property name="type" value="equilateral"></property>  --><!-- Setter injection -->
+	
+	<constructor-arg  type ="int" value="20"></constructor-arg>
+	<constructor-arg type ="String" value="isoceles"></constructor-arg> <!-- Constructor injection -->	
+</bean>
+
+
+<!-- Square  : Object injection,Inner bean-->
+
+	<bean id="zeropoint" class="com.spring.Point">
+		<property name="a" value="0"></property>
+		<property name="b" value="0"></property>
+	</bean>
+	<bean id="pointb" class="com.spring.Point">
+		<property name="a" value="0"></property>
+		<property name="b" value="6"></property>
+	</bean>
+	<bean id="pointc" class="com.spring.Point">
+		<property name="a" value="2"></property>
+		<property name="b" value="6"></property>
+	</bean>
+	<bean id="pointd" class="com.spring.Point">
+		<property name="a" value="2"></property>
+		<property name="b" value="0"></property>
+	</bean>
+
+<bean id="square" class="com.spring.Square">
+	<property name="pointA" ref="zeropoint"></property>
+	<property name="pointB" > <!--this is how inner bean is created  -->
+		<bean  class="com.spring.Point">
+			<property name="a" value="0"></property>
+			<property name="b" value="8"></property>
+		</bean>
+	</property>
+	<property name="pointC" ref="pointc"></property>
+	<property name="pointD" ref="pointd"></property>
+	
+	<!-- <constructor-arg index="0" ref="zeropoint"/>
+	<constructor-arg index="1">
+		<bean  class="com.spring.Point">
+			<property name="a" value="0"></property>
+			<property name="b" value="6"></property>
+		</bean>
+	</constructor-arg>
+	<constructor-arg index="2" ref="pointc"/>
+	<constructor-arg index="3" ref="pointd"/> -->
+</bean>
+
+
+<!-- Line : To show list -->
+
+<bean id = "line" class="com.spring.Line">
+	<property name="points">
+		<list>
+			<ref bean="pointc"/>
+			<ref bean="pointd"/>
+		</list>
+	</property>
+</bean >
+
+
+</beans>

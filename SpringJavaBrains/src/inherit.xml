@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd" 
+
+ default-init-method="init" default-destroy-method="clean" >
+
+<bean id="car" class="com.spring.inherit.Car" abstract="true">
+	<property name="mileage" value="${mileage}"></property>
+	<property name="bodyType" value="Sedan"></property>
+	<property name="models">
+		<list>
+		<value>Ameo</value>
+		<value>GTI</value>
+		<value>Passat</value>
+		</list>
+	</property>
+	
+</bean>
+
+
+<bean id="volkswagen" class="com.spring.inherit.Car" parent="car">
+	<property name="ac" value="yes"></property>
+</bean>
+
+<bean id="volkswagenX" class="com.spring.inherit.Car" parent="volkswagen" >
+	<property name="transmission" value="Auto"></property>
+	<property name="models">
+		<list> <!--  <list merge="true"> If merge is not true then it replace the collection -->
+			<value>Vento</value>
+		</list>
+	</property>
+</bean>
+
+
+<bean id="autowiring" class="com.spring.Point">
+		<property name="a" value="0"></property>
+		<property name="b" value="0"></property>
+	</bean>
+	
+	
+	<!--Custom Bean post processor  -->
+<bean class="com.spring.inherit.DisplayNameBeanPostProcessor"></bean>
+
+	<!--Custom Bean factory post processor  -->
+<bean class="com.spring.inherit.BeanFactoryPostProcessorCustom"></bean>
+
+	<!--out of the box Bean factory post processor  -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations" value="classpath:com/spring/resources/spring.properties"></property>
+</bean>
+
+	<!--Annotation Bean factory post processor  -->
+<!-- <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"></bean>
+<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean> -->
+<!-- The below  context is enough and not need of above annotation related  PostProcessorBean -->
+<context:annotation-config/>
+
+</beans>

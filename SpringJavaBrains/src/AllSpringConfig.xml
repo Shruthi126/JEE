@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- In a large project structure, the Spring’s bean configuration files are located in different folders for easy 
+	 maintainability and modular. 
+
+	To add multiple spring config file
+	  1. First way 
+		  ApplicationContext ap= new ClassPathXmlApplicationContext(new String[] {"springGeo.xml","inherit.xml"} );
+	   2. Second way all files should be in classpath strictly. Use one more config file to import all together
+		   	<import resource="springGeo.xml"/>
+	 -->	
+		
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<import resource="inherit.xml"/>
+        <import resource="spring.xml"/>
+        <import resource="springGeo.xml"/>
+	
+</beans>
