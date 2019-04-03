@@ -5,7 +5,7 @@ public class BinarySearch {
 	public static void main(String args[]){
 			int a[]={2,5,7,9,10,25,36,38,40};
 			System.out.println(binarySearch(a, 10));
-			System.out.println(binarySearchRR(a,0,a.length-1, 10));
+			System.out.println(binarySearchRR(a,0,a.length-1, 5));
 	}
 
 	public static int binarySearch(int a[], int key){
